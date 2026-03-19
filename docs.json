@@ -24,7 +24,9 @@
           },
           {
             "group": "Best Practices",
-            "pages": []
+            "pages": [
+              "signal-instructions"
+            ]
           }
         ]
       }
