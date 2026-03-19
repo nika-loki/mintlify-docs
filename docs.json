@@ -7,7 +7,7 @@
     "light": "#fff5e6",
     "dark": "#ffebcc"
   },
-  "favicon": "/images/favicon_latest.png",
+  "favicon": "/images/salesduo_logo.svg",
   "navigation": {
     "tabs": [
       {
@@ -24,15 +24,13 @@
           },
           {
             "group": "Best Practices",
-            "pages": [
-              "signal-instructions"
-            ]
+            "pages": []
           }
         ]
       }
     ]
   },
-  "logo": "/images/favicon-32x32.png",
+  "logo": "/images/salesduo_logo.svg",
   "navbar": {
     "links": [
       {
