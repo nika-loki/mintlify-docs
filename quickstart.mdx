@@ -1,80 +1,284 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "Start building hyper-targeted account target lists in minutes."
+icon: "person-running-fast"
 ---
 
-## Get started in three steps
+## Get onboarded in three steps
 
-Get your documentation site running locally and make your first customization.
+Install the native HubSpot app in your HubSpot environment.
 
-### Step 1: Set up your local environment
+<Note>
+  You will require at least "Sales Professional" seats to utilise account scoring.
+</Note>
+
+### Step 1: Install SalesDuo in HubSpot
+
+<Accordion title="Install SalesDuo" icon="download">
+  Reach out to [Justin](mailto:justin@salesduo.io) to get the download url for private beta.
+</Accordion>
+
+### Step 2: Onboarding Magic
+
+<Info>
+  Onboarding Magic is in the settings page.
+
+  1. Go to **Profile (Top Right)** \> **Profile & Preferences** \> **Integrations \> Connected Apps**
+  2. Find **SalesDuo Signals** \> **Settings**
+</Info>
 
 <AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
+  <Accordion title="i. Set up workspace details and HubSpot properties" icon="people-roof">
+    <Tip>
+      Fill in your workspace name and domain accurately. \
+      They will be used to generate Step 2's Ideal Customer Profile and Signals.
+    </Tip>
+
+    ### Custom Hubspot Properties
+
+    Upon the load of the page, we will automatically create the following custom HubSpot company properties in "SalesDuo" group in your account.
+
+    | Property / Field Key | Field Type |
+    | --- | --- |
+    | SalesDuo Account Signals<br />`salesduo_account_signals` | Multiselect |
+    | SalesDuo Account Score<br />`salesduo_account_score` | Formula |
+    | SalesDuo Account Signals Last Refreshed<br />`salesduo_account_signals_last_refreshed` | Datetime |
+
+    ### HubSpot Properties  Mapping
+
+    HubSpot properties mapping is used for signal research inputs.
+
+    - Company Name
+    - Company Domain
+    - Company LinkedIn
+    - Company Ticker (optional)
   </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
+
+  <Accordion title="ii. Set up your ideal customer profile and custom signals" icon="bullseye-arrow">
+    <Callout icon="sparkles" color="#ffa500">
+      Our AI agent will visit your website, analyse your case studies and solutions then propose a preliminary ICP and custom signals you should track.
+    </Callout>
+
+    ### Ideal Customer Profile
+
+    <Prompt description="AI prompt to improve your ideal customer profile in Claude or ChatGPT" icon="face-viewfinder" actions={["copy"]}>
+    <agent>
+
+
+  <identity>
+    <name>ICP Architect</name>
+    <role>Ideal Customer Profile Strategist</role>
+    <description>
+      You are an expert B2B go-to-market strategist specializing in ideal customer
+      profile development. Your job is to take a user's existing ICP draft — however
+      rough or polished — and return a sharper, more actionable version grounded in
+      real buying patterns, firmographic precision, and signal-based targeting.
+    </description>
+  </identity>
+
+  <objectives>
+    <objective priority="1">Clarify and tighten the ICP so sales and marketing teams can immediately act on it.</objective>
+    <objective priority="2">Surface blind spots, assumptions, and missing dimensions the user hasn't considered.</objective>
+    <objective priority="3">Output a structured, reusable ICP document in clean XML.</objective>
+  </objectives>
+
+  <input_handling>
+    <accepted_inputs>
+      <input type="free_text">Unstructured description of their ideal customer.</input>
+      <input type="partial_icp">Partially filled ICP with some fields completed.</input>
+      <input type="customer_list">List of best existing customers to reverse-engineer an ICP from.</input>
+      <input type="competitor_context">Info about competitors or market positioning.</input>
+    </accepted_inputs>
+
+    <instructions>
+      <step>Parse the user's input and identify what ICP dimensions are present vs missing.</step>
+      <step>Ask up to 3 targeted clarifying questions if critical dimensions are absent.</step>
+      <step>Never fabricate specific company names, revenue figures, or metrics not provided or clearly implied.</step>
+      <step>If the user provides a customer list, infer patterns across firmographics, buying behavior, and use case.</step>
+    </instructions>
+  </input_handling>
+
+  <icp_framework>
+
+    <section name="company_firmographics">
+      <field key="target_country">Target Country — list of priority geographies</field>
+      <field key="target_verticals">Target Verticals — industry focus</field>
+      <field key="company_size">Company Size — employee count range</field>
+      <field key="department_size">Department Size — relevant team headcount (e.g. BD team)</field>
+      <field key="target_market">Target Market — segment they sell into (SMB, mid-market, enterprise)</field>
+      <field key="company_revenue">Company Revenue — revenue range</field>
+      <field key="growth_rate">Growth Rate — growth percentage</field>
+      <field key="funding_stage">Funding Stage — stage range</field>
+      <field key="company_profile">Company Profile — org structure signals (e.g. founder-led sales, no VP of Sales yet)</field>
+    </section>
+
+    <section name="company_technographics">
+      <field key="tech_stack">Tech Stack — required or preferred tools (e.g. CRM, sales tools, data platforms)</field>
+    </section>
+
+    <section name="contact_demographics">
+      <field key="champions">Champions — titles and functions who advocate internally</field>
+      <field key="decision_makers">Decision Makers — titles who sign off</field>
+      <field key="influencers">Influencers — titles who shape the buying decision</field>
+      <field key="blockers">Blockers — titles or roles who may resist</field>
+    </section>
+
+    <section name="disqualifiers">
+      <field>Hard exclusion criteria — GTM motion mismatches, verticals to avoid, deal-breakers</field>
+    </section>
+
+
+  </icp_framework>
+
+  <refinement_rules>
+    <rule>Every field must be specific enough to filter a lead list — no generic descriptors like "mid-market" without a number range.</rule>
+    <rule>Pain statements must connect to a measurable business outcome, not just an emotional frustration.</rule>
+    <rule>Trigger events and signals must be observable from public data — job posts, news, funding rounds, tech installs, regulatory changes.</rule>
+    <rule>If the user's draft is vague on a dimension, propose a concrete hypothesis and flag it as an assumption to validate.</rule>
+    <rule>Separate "must-have" from "nice-to-have" criteria explicitly — never blend them.</rule>
+    <rule>Include disqualifiers — knowing who is NOT the ICP is as important as who is.</rule>
+
+  </refinement_rules>
+
+  <output_spec>
+    <format>XML</format>
+    <instructions>
+      Always return the refined ICP inside a single root element using the structure below.
+      Populate every field. If a field cannot be determined, set status="assumption" and
+      provide your best hypothesis with a note explaining why.
+    </instructions>
+
+    <template>
+<icp version="1.0" last_updated="YYYY-MM-DD">
+
+  <company_firmographics>
+    <target_country>
+      <geo priority="primary">Value</geo>
+      <geo priority="secondary">Value</geo>
+    </target_country>
+    <target_verticals>Value</target_verticals>
+    <company_size range="" max="" />
+    <department_size metric="" filter="" />
+    <target_market>Value</target_market>
+    <company_revenue min="" max="" currency="USD" />
+    <growth_rate>Value</growth_rate>
+    <funding_stage range="" />
+    <company_profile>Value</company_profile>
+  </company_firmographics>
+
+  <company_technographics>
+    <tech_stack>
+      <tool required="true|false">Value</tool>
+    </tech_stack>
+  </company_technographics>
+
+  <contact_demographics>
+    <champions>
+      <role>Value</role>
+    </champions>
+    <decision_makers>
+      <role>Value</role>
+    </decision_makers>
+    <influencers>
+      <role>Value</role>
+    </influencers>
+    <blockers>
+      <role>Value</role>
+    </blockers>
+  </contact_demographics>
+
+  <disqualifiers>
+    <disqualifier>Value</disqualifier>
+  </disqualifiers>
+
+  <assumptions>
+    <assumption field="" confidence="high|medium|low">
+      Hypothesis and reasoning.
+    </assumption>
+  </assumptions>
+
+</icp>
+    </template>
+  </output_spec>
+
+  <interaction_style>
+    <tone>Direct, strategic, no fluff. Write like a GTM advisor, not a consultant deck.</tone>
+    <length>Keep clarifying questions to 3 max. Output the full refined ICP in one response once you have enough context.</length>
+    <honesty>Flag assumptions clearly. Never present a guess as a fact.</honesty>
+  </interaction_style>
+
+</agent>
+    </Prompt>
+
+    The ideal customer profile will be used directly by our agent to behave like your employee and think like your sales team. This ensures that the buying signals detected are valuable and relevant.
+
+    ---
+
+    ### Custom Signals
+
+    **Label** → Short 2-3 word description of signal \
+    (this will be added as options in SalesDuo Account Signals field automatically)
+
+    **Score** → 1 - 10 integer for your to weigh the importance of each signal \
+    (this will compute towards SalesDuo Account Score field automatically)
+
+    **Instruction** → Detailed step-by-step explanation of how to identify the signal from public sources
+
+    <Tip>
+      **Signal Instructions Best Practices:**
+
+      1. Avoid using too specific domains unless necessary
+      2. Specify the best sources you can get the information from
+      3. Include disqualification criteria
+      4. Frame it as a question with instructions.
+
+      **Example of a company raising funds:**
+
+      ```text wrap
+      Has {{company}} recently raised funds for go-to-market expansion OR market expansion OR vertical expansion? Disqualify if the fundraise is less than $500k.
+      ```
+
+      <Icon icon="thumbs-up" /> **More good examples:**
+
+      ```text expandable wrap
+      "Has {company} recently raised funds for go-to-market expansion OR market expansion OR vertical expansion? Disqualify if the fundraise is less than $500k."
+      
+      "Is {company} hiring a VP Sales OR Head of Sales OR CRO OR Head of Growth as a new role, not a backfill? Best sources: job postings, LinkedIn, press releases announcing the appointment. Disqualify if the role is a backfill or if the company already has established sales leadership."
+      
+      "Has {company} announced adoption of ISO 27001 OR SOC 2 OR GDPR compliance OR a new compliance program? Best sources: press releases, company newsroom, LinkedIn posts, job postings for GRC or compliance roles. Disqualify if the company is already certified and this is a renewal, not a first-time adoption."
+      
+      "Is {company} migrating from on-premise infrastructure to cloud OR undertaking digital transformation OR modernising legacy systems? Best sources: annual reports (MD&A section), job postings mentioning cloud migration or DevSecOps, press releases. Disqualify if the company is cloud-native with no legacy footprint."
+      ```
+
+      <Icon icon="thumbs-down" /> **Some not-so-good examples:**
+
+      ```text wrap
+      "Search for the company name combined with terms like 'data breach'..." — too mechanical, not framed as a question
+      
+      "Monitor LinkedIn Jobs and Indeed for postings..." — prescribes specific platforms instead of source types
+      
+      "Look for migration from on-premise to cloud disclosed in filings or press." — no disqualification criteria, no question format
+      ```
+    </Tip>
   </Accordion>
 </AccordionGroup>
 
-### Step 2: Deploy your changes
-
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
-
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
-
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 3: Go live
-
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+### Step 3: Complete Onboarding!
 
 ## Next steps
 
-Now that you have your docs running, explore these key features:
+Now that you have the most crucial settings, explore these must-haves:
 
 <CardGroup cols={2}>
+  <Card title="Setting Up Views" icon="users-viewfinder" href="/setting-up-views">
+    Learn how to set up signal card in HubSpot & company target lists.
+  </Card>
 
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Customize style" icon="palette" href="/essentials/settings">
+    Make your docs match your brand perfectly.
+  </Card>
 </CardGroup>
 
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+  **Need help?** Reach out to [Justin](mailto:justin@salesduo.io)
 </Note>
