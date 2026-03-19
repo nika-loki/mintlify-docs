@@ -25,7 +25,14 @@
           {
             "group": "Best Practices",
             "pages": [
-              "signal-instructions"
+              "signal-instructions",
+              "signal-frequency"
+            ]
+          },
+          {
+            "group": "Mastery 101",
+            "pages": [
+              "batch-run"
             ]
           }
         ]
