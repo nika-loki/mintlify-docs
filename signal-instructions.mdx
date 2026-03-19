@@ -4,4 +4,52 @@ icon: "signal-stream"
 ---
 
 <Card title="Signal Configuration">
+  <Frame>
+    ![Image](/images/image.png)
+  </Frame>
+
+  **Label** → Short 2-3 word description of signal \
+  (this will be added as options in SalesDuo Account Signals field automatically)
+
+  **Score** → 1 - 10 integer for your to weigh the importance of each signal \
+  (this will compute towards SalesDuo Account Score field automatically)
+
+  **Instruction** → Detailed step-by-step explanation of how to identify the signal from public sources
 </Card>
+
+### Best Practice
+
+1. Avoid using too specific domains unless necessary
+2. Specify the best sources you can get the information from
+3. Include disqualification criteria
+4. Frame it as a question with instructions.
+
+### Examples
+
+**Example of a company raising funds:**
+
+```text wrap
+Has {{company}} recently raised funds for go-to-market expansion OR market expansion OR vertical expansion? Disqualify if the fundraise is less than $500k.
+```
+
+<Icon icon="thumbs-up" /> **More good examples:**
+
+```text expandable wrap
+"Has {company} recently raised funds for go-to-market expansion OR market expansion OR vertical expansion? Disqualify if the fundraise is less than $500k."
+
+"Is {company} hiring a VP Sales OR Head of Sales OR CRO OR Head of Growth as a new role, not a backfill? Best sources: job postings, LinkedIn, press releases announcing the appointment. Disqualify if the role is a backfill or if the company already has established sales leadership."
+
+"Has {company} announced adoption of ISO 27001 OR SOC 2 OR GDPR compliance OR a new compliance program? Best sources: press releases, company newsroom, LinkedIn posts, job postings for GRC or compliance roles. Disqualify if the company is already certified and this is a renewal, not a first-time adoption."
+
+"Is {company} migrating from on-premise infrastructure to cloud OR undertaking digital transformation OR modernising legacy systems? Best sources: annual reports (MD&A section), job postings mentioning cloud migration or DevSecOps, press releases. Disqualify if the company is cloud-native with no legacy footprint."
+```
+
+<Icon icon="thumbs-down" /> **Some not-so-good examples:**
+
+```text wrap
+"Search for the company name combined with terms like 'data breach'..." — too mechanical, not framed as a question
+
+"Monitor LinkedIn Jobs and Indeed for postings..." — prescribes specific platforms instead of source types
+
+"Look for migration from on-premise to cloud disclosed in filings or press." — no disqualification criteria, no question format
+```
